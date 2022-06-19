@@ -2,7 +2,7 @@ import React from "react";
 
 const Lists = ({ title, image_url, population, region, capital }) => {
   return (
-    <div className="box-border h-full container rounded-lg shadow-lg bg-white dark:bg-gray-600 dark:text-white pb-4">
+    <div className="box-border h-80 container rounded-lg shadow-lg bg-white dark:bg-gray-600 dark:text-white pb-4">
       <img
         src={image_url}
         alt={title}

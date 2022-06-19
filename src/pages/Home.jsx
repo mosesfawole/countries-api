@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { FaSun, FaMoon, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import Header from "../components/Header";
+import { FaSearch } from "react-icons/fa";
 import Lists from "../components/Lists";
+
+import { useStateContext } from "../contexts/ContextProvider";
+import Spinner from "../components/Spinner";
 
 const Home = () => {
   const [countries, setCountries] = useState([]);
-  const [darkMode, setDarkMode] = useState(false);
+  const { darkMode, setDarkMode, isLoading, setIsLoading } = useStateContext();
 
   useEffect(() => {
     getCountries();
@@ -18,6 +21,7 @@ const Home = () => {
     );
     const data = await res.json();
     setCountries(data);
+    setIsLoading(false);
   };
 
   const searchCountry = async (term) => {
@@ -25,6 +29,7 @@ const Home = () => {
     const res = await fetch(`https://restcountries.com/v3.1/name/${term}`);
     const data = await res.json();
     setCountries(data);
+    setIsLoading(false);
   };
 
   const filterByRegion = async (region) => {
@@ -33,9 +38,7 @@ const Home = () => {
         `);
     const data = await res.json();
     setCountries(data);
-  };
-  const toggleMode = () => {
-    setDarkMode(!darkMode);
+    setIsLoading(false);
   };
 
   return (
@@ -43,29 +46,35 @@ const Home = () => {
       className={`bg-gray-100 dark:bg-gray-800 dark:text-white
        ${darkMode && "dark"}`}
     >
-      <div className="shadow-md py-6 px-3 bg-white dark:bg-gray-700 dark:text-white mb-16">
-        <div className="flex container mx-auto">
-          <h1 className="font-bold text-xl">Where in the world?</h1>
-          <div className="ml-auto font-medium ">
-            <button className="flex items-center " onClick={() => toggleMode()}>
-              DarkMode{" "}
-              {darkMode === false ? <FaSun className="" /> : <FaMoon />}
-            </button>
+      <Header />
+      <div className="flex items-center flex-col md:flex-row p-6 md:p-10">
+        <div className="relative w-80">
+          <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <svg
+              className="w-5 h-5 text-gray-500 dark:text-gray-400"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
           </div>
+          <input
+            type="text"
+            className=" border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+            placeholder="Search for country"
+          />
         </div>
-      </div>
-      <div className="flex container mx-auto mb-16">
-        <FaSearch className="my-auto -mr-9 z-10 pr-2 pl-3 py-5 rounded-md text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search for a country"
-          onChange={(term) => searchCountry(term.target.value)}
-          className="pl-10 p-2 shadow-md rounded-md w-1/3 dark:bg-gray-200"
-        />
         <select
-          className=" ml-auto
+          className=" mr-auto
          my-2
-         p-2
+         md:mr-0
+         p-4
+ md:ml-auto
          shadow-md
          rounded-md
          font-medium
@@ -80,23 +89,28 @@ const Home = () => {
           <option value="oceania">Oceania</option>
         </select>
       </div>
-      <div className="grid gap-16 md:grid-cols-4 grid-rows-3 pl-10 p-2 dark:text-white">
-        {countries.map((country, index) => (
-          <Link to="/details" key={index}>
-            <Lists
-              title={country.name.common}
-              image_url={country.flags.png}
-              population={country.population}
-              region={country.region}
-              capital={country.capital}
-              language={country.languages}
-              coatOfArms={country.coatOfArms}
-              //   currency={country.currencies[0].name}}}
-              //   currencySymbol={country.currencies.symbol}
-            ></Lists>
-          </Link>
-        ))}
-      </div>
+
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div className="grid gap-16 grid-cols-1 md:grid-cols-4 md:grid md:gap-16 grid-rows-3 p-8 md:p-4 dark:text-white">
+          {countries.map((country, index) => (
+            <Link to="/details" key={index}>
+              <Lists
+                title={country.name.common}
+                image_url={country.flags.png}
+                population={country.population}
+                region={country.region}
+                capital={country.capital}
+                language={country.languages}
+                coatOfArms={country.coatOfArms}
+                //   currency={country.currencies[0].name}}}
+                //   currencySymbol={country.currencies.symbol}
+              ></Lists>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
