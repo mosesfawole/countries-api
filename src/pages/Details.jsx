@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useStateContext } from "../contexts/ContextProvider";
 import Spinner from "../components/Spinner";
 import Detail from "../components/Detail";
+import Footer from "../components/Footer";
 const Details = ({ title, image_url }) => {
   const { darkMode, isLoading, setIsLoading } = useStateContext();
 
@@ -63,6 +64,7 @@ const Details = ({ title, image_url }) => {
               languages={detail.languages.map((lang) => lang.name)}
             />
           ))}
+          <Footer />
         </div>
       )}
     </div>

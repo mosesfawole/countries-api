@@ -9,7 +9,7 @@ const Header = () => {
     setTheme(!theme);
   };
   return (
-    <div className="w-screen shadow-md py-6 px-3 bg-white dark:bg-gray-700 dark:text-white">
+    <div className="shadow-md py-6 px-3 bg-white dark:bg-gray-700 dark:text-white">
       <div className="flex container mx-auto">
         <h1 className="font-bold text-xl">Where in the world?</h1>
         <div className="ml-auto font-medium ">
