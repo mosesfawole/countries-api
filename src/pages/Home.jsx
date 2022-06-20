@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { FaSearch } from "react-icons/fa";
 import Lists from "../components/Lists";
+import { motion } from "framer-motion";
 
 import { useStateContext } from "../contexts/ContextProvider";
 import Spinner from "../components/Spinner";
@@ -17,10 +18,11 @@ const Home = () => {
 
   const getCountries = async () => {
     const res = await fetch(
-      "https://restcountries.com/v3.1/all?sort_by=asc(name)"
+      "https://restcountries.com/v3.1/all?sort_by=dsc(name)"
     );
     const data = await res.json();
     setCountries(data);
+
     setIsLoading(false);
   };
 
@@ -43,11 +45,15 @@ const Home = () => {
 
   return (
     <div
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
       className={`bg-gray-100 dark:bg-gray-800 dark:text-white
        ${darkMode && "dark"}`}
     >
       <Header />
-      <div className="flex items-center flex-col md:flex-row p-6 md:p-10">
+      <div className="flex items-center flex-col dark:bg-gray-800 md:flex-row p-6 md:p-10">
         <div className="relative w-80">
           <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
             <svg
@@ -67,6 +73,7 @@ const Home = () => {
             type="text"
             className=" border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
             placeholder="Search for country"
+            onChange={(e) => searchCountry(e.target.value)}
           />
         </div>
         <select
@@ -89,13 +96,24 @@ const Home = () => {
           <option value="oceania">Oceania</option>
         </select>
       </div>
+      {!isLoading && countries.length === 0 && (
+        <h1 className="text-5xl text-center mx-auto mt-32">
+          <Spinner />
+        </h1>
+      )}
 
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="grid gap-16 grid-cols-1 md:grid-cols-4 md:grid md:gap-16 grid-rows-3 p-8 md:p-4 dark:text-white">
+        <motion.div
+          className="grid gap-16 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 md:grid md:gap-16 grid-rows-3 p-8 md:p-4 dark:text-white dark:bg-gray-800"
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           {countries.map((country, index) => (
-            <Link to="/details" key={index}>
+            <Link to={`/details/${country.name.common}`} key={index}>
               <Lists
                 title={country.name.common}
                 image_url={country.flags.png}
@@ -106,10 +124,10 @@ const Home = () => {
                 coatOfArms={country.coatOfArms}
                 //   currency={country.currencies[0].name}}}
                 //   currencySymbol={country.currencies.symbol}
-              ></Lists>
+              />
             </Link>
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   );

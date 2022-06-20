@@ -4,7 +4,7 @@ const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
-  const [theme, setTheme] = useState("Light Mode");
+  const [theme, setTheme] = useState("true");
   const [isLoading, setIsLoading] = useState(true);
 
   return (

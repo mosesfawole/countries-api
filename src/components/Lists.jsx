@@ -9,7 +9,7 @@ const Lists = ({ title, image_url, population, region, capital }) => {
         loading="lazy"
         className="h-1/2 w-full rounded-tl-lg rounded-tr-lg "
       />
-      <div className="p-4 ">
+      <div className="p-4 dark:text-gray-300 ">
         <h3 className="font-bold mb-4">{title}</h3>
         <p className="text-xs font-bold">
           Population :{" "}

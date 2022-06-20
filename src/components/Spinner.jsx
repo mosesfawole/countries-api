@@ -2,7 +2,7 @@ import React from "react";
 import Loading from "../gif/new.gif";
 const Spinner = () => {
   return (
-    <div className="mx-auto flex  justify-center  items-center">
+    <div className="mx-auto flex  justify-center  items-center dark:bg-gray-800">
       <img src={Loading} className="h-full w-1/4" alt="Loading..." />
     </div>
   );
