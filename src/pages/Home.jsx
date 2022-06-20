@@ -30,8 +30,12 @@ const Home = () => {
     if (term.length < 1) return;
     const res = await fetch(`https://restcountries.com/v3.1/name/${term}`);
     const data = await res.json();
-    setCountries(data);
-    setIsLoading(false);
+    if (data.length > 0) {
+      setIsLoading(true);
+    } else {
+      setCountries(data);
+      setIsLoading(false);
+    }
   };
 
   const filterByRegion = async (region) => {
@@ -39,6 +43,7 @@ const Home = () => {
     const res = await fetch(`https://restcountries.com/v3.1/region/${region}
         `);
     const data = await res.json();
+
     setCountries(data);
     setIsLoading(false);
   };

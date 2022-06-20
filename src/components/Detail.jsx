@@ -1,5 +1,5 @@
 import React from "react";
-
+import { motion } from "framer-motion";
 const Detail = ({
   nativeName,
   image_url,
@@ -13,7 +13,13 @@ const Detail = ({
   languages,
 }) => {
   return (
-    <div className="container flex flex-col  md:flex-row mx-auto p-11 pl-0 pr-0 h-full  md:items-center ">
+    <motion.div
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="container flex flex-col  md:flex-row mx-auto p-11 pl-0 pr-0 h-full  md:items-center "
+    >
       <img
         src={image_url}
         loading="lazy"
@@ -73,7 +79,7 @@ const Detail = ({
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
