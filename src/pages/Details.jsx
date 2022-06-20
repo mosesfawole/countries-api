@@ -20,6 +20,7 @@ const Details = ({ title, image_url }) => {
 
   useEffect(() => {
     fetchDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const fetchDetails = async () => {
     const res = await fetch(`https://restcountries.com/v2/name/${params.name}`);

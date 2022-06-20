@@ -10,6 +10,7 @@ const Header = () => {
     } else {
       setDarkMode(darkMode);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const { darkMode, setDarkMode, theme, setTheme } = useStateContext();
   const toggleMode = () => {

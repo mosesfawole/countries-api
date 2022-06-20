@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
-import { FaSearch } from "react-icons/fa";
 import Lists from "../components/Lists";
 import { motion } from "framer-motion";
 
@@ -10,10 +9,11 @@ import Spinner from "../components/Spinner";
 
 const Home = () => {
   const [countries, setCountries] = useState([]);
-  const { darkMode, setDarkMode, isLoading, setIsLoading } = useStateContext();
+  const { darkMode, isLoading, setIsLoading } = useStateContext();
 
   useEffect(() => {
     getCountries();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getCountries = async () => {
