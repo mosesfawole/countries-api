@@ -25,10 +25,10 @@ const Home = () => {
   };
 
   const searchCountry = async (term) => {
-    if (term.length < 1 || term === "") return;
+    if (term.length < 1 || term === "" || term === undefined) return;
     const res = await fetch(`https://restcountries.com/v3.1/name/${term}`);
     const data = await res.json();
-    if (data.length < 1) return;
+
     setCountries(data);
     setIsLoading(false);
   };
@@ -96,11 +96,7 @@ const Home = () => {
           <option value="oceania">Oceania</option>
         </select>
       </div>
-      {!isLoading && countries.length === 0 && (
-        <h1 className="text-5xl text-center mx-auto mt-32">
-          <Spinner />
-        </h1>
-      )}
+      {}
 
       {isLoading ? (
         <Spinner />
