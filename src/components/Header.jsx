@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 import { useStateContext } from "../contexts/ContextProvider";
 const Header = () => {
@@ -21,7 +22,11 @@ const Header = () => {
   return (
     <div className="shadow-md py-6 px-3 bg-white dark:bg-gray-700 dark:text-white">
       <div className="flex container mx-auto">
-        <h1 className="font-bold text-xl">Where in the world?</h1>
+        <Link to="/" reloadDocument>
+          <h1 className="font-bold text-xl cursor-pointer">
+            Where in the world?
+          </h1>
+        </Link>
         <div className="ml-auto font-medium ">
           <button className="flex items-center " onClick={() => toggleMode()}>
             {darkMode === false ? <FaSun /> : <FaMoon />}

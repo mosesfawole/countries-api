@@ -17,9 +17,7 @@ const Home = () => {
   }, []);
 
   const getCountries = async () => {
-    const res = await fetch(
-      "https://restcountries.com/v3.1/all?sort_by=dsc(name)"
-    );
+    const res = await fetch("https://restcountries.com/v3.1/all");
     const data = await res.json();
     setCountries(data);
 
@@ -27,19 +25,16 @@ const Home = () => {
   };
 
   const searchCountry = async (term) => {
-    if (term.length < 1) return;
+    if (term.length < 1 || term === "") return;
     const res = await fetch(`https://restcountries.com/v3.1/name/${term}`);
     const data = await res.json();
-    if (data.length > 0) {
-      setIsLoading(true);
-    } else {
-      setCountries(data);
-      setIsLoading(false);
-    }
+    if (data.length < 1) return;
+    setCountries(data);
+    setIsLoading(false);
   };
 
   const filterByRegion = async (region) => {
-    if (region.length === "") return;
+    if (region === "") return;
     const res = await fetch(`https://restcountries.com/v3.1/region/${region}
         `);
     const data = await res.json();
@@ -93,7 +88,7 @@ const Home = () => {
          dark:bg-gray-200"
           onChange={(term) => filterByRegion(term.target.value)}
         >
-          <option>Filter by Region</option>
+          <option value="">Filter by Region</option>
           <option value="africa">Africa</option>
           <option value="america">America</option>
           <option value="asia">Asia</option>
