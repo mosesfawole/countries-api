@@ -29,8 +29,8 @@ const Header = () => {
         </Link>
         <div className="ml-auto font-medium ">
           <button className="flex items-center " onClick={() => toggleMode()}>
-            {darkMode === false ? <FaSun /> : <FaMoon />}
-            {theme === true ? "Dark Mode" : "Light Mode"}
+            {darkMode === false ? <FaMoon /> : <FaSun />}
+            {theme === true ? "Light Mode" : "Dark Mode"}
           </button>
         </div>
       </div>
