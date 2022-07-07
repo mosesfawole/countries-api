@@ -9,10 +9,11 @@ import Spinner from "../components/Spinner";
 
 const Home = () => {
   const [countries, setCountries] = useState([]);
-  const { darkMode, isLoading, setIsLoading } = useStateContext();
+  const { darkMode, setDarkMode, isLoading, setIsLoading } = useStateContext();
 
   useEffect(() => {
     getCountries();
+    setDarkMode(darkMode);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
