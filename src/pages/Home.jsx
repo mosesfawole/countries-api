@@ -100,7 +100,9 @@ const Home = () => {
       {}
 
       {isLoading ? (
-        <Spinner />
+        <div className="wrapper">
+          <Spinner />
+        </div>
       ) : (
         <motion.div
           className="grid gap-16 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 md:grid md:gap-16 grid-rows-3 p-8 md:p-4 dark:text-white dark:bg-gray-800"

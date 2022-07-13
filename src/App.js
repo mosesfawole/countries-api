@@ -7,12 +7,14 @@ import Header from "./components/Header";
 function App() {
   return (
     <AnimatePresence exitBeforeEnter>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/details/:name" element={<Details />} />
-        </Routes>
-      </Router>
+      <div className="wrapper">
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/details/:name" element={<Details />} />
+          </Routes>
+        </Router>
+      </div>
     </AnimatePresence>
   );
 }

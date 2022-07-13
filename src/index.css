@@ -6,3 +6,6 @@ img {
   max-width: 100%;
   height: 250px;
 }
+.wrapper {
+  height: 100vh;
+}

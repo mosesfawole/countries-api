@@ -74,7 +74,7 @@ const Detail = ({
           <p className="font-semibold">
             Languages:{" "}
             <span className="dark:text-gray-300 text-gray-700 text-sm">
-              {languages}
+              {`${languages} `}
             </span>
           </p>
         </div>

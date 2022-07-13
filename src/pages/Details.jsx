@@ -31,10 +31,9 @@ const Details = ({ title, image_url }) => {
 
   return (
     <div
-      className={`bg-gray-100 dark:bg-gray-800 dark:text-white
+      className={` bg-gray-100 dark:bg-gray-800 dark:text-white
      ${darkMode && "dark"}`}
     >
-      <Header />
       <div className="dark:bg-gray-800">
         <div className="container mx-auto p-4 ">
           <button
@@ -47,7 +46,9 @@ const Details = ({ title, image_url }) => {
         </div>
       </div>
       {isLoading ? (
-        <Spinner />
+        <div className="wrapper">
+          <Spinner />
+        </div>
       ) : (
         <div className="p-10 dark:bg-gray-800">
           {details.map((detail, index) => (
